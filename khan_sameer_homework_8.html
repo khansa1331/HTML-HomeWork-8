@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vote Checker</title>
+<style>
+.form-style-classic {
+    width:300px;
+    border:solid 2px #FFAD33;
+    background-color:#FF33E3;
+    padding:10px;
+}
+.results-output { 
+    color:#980E52;
+    }
+</style>
+</head>
+<body>
+   <h2>Vote Checker</h2>
+<form id="voterInfo" class="form-style-classic">
+<p><label for="txtAge">What year were you born in?</label>
+   <input type="text" id="txtAge" size="5" /></p>
+
+<p><label for="txtRegistered">Are you registered to vote?</label>
+<select name="reg" id="reg"><option value="yes">Yes</option><option value="no">No</option></select></p>
+
+<p><label for="txtFelon">Are you a convicted felon?</label>
+<select name="fel" id="fel"><option value="yes">Yes</option><option value="no">No</option></select></p>
+
+<p><label for="citizen">Are you a Citizen?</label>
+<select name="cit" id="cit"><option value="yes">Yes</option><option value="no">No</option></select></p>
+
+<p>***
+<button type="button" onclick="checkVoterEligibility()" style="background-color:#05E8F3;">
+Can I Vote?</button>
+***</p> 
+</form>
+    
+<div id="voteResults" class="results-output"></div><!-- end of voteResults div -->
+    
+<script>
+    
+function checkVoterEligibility() {
+var age, isFelon, isRegistered,year,isCitizen;
+
+var today = new Date();
+
+year = document.getElementById('txtAge').value;
+year = parseInt(year);
+age = today.getFullYear() - year;
+
+isRegistered = document.getElementById('reg').value;
+
+isFelon = document.getElementById('fel').value;
+
+isCitizen = document.getElementById('cit').value;
+
+if ( age>=18 && isRegistered=="yes" && isFelon=="no" && isCitizen=="yes")
+    
+{
+    
+resultsString = "Congratulations, you may vote!";
+    
+}
+    
+else
+    
+{
+    
+resultsString = "I'm sorry, you are not qualified to vote.";
+    
+}
+
+document.getElementById("voteResults").innerHTML = resultsString;
+    
+}
+</script>
+</body>
+</html>
